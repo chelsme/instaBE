@@ -25,14 +25,10 @@ class ApplicationController < ActionController::API
         if authorization_header && JWT.decode(payload, nil, false)[0]['user_id'] == params[:id].to_i
             # if JWT is valid
             user = User.find(params[:id])
-            user.update(uswername: params[:username])
+            # byebug
+            user.update(bio: params[:bio])
 
             render json: user
-        else
-            # if JWT is NOT valid
-            render :json => {
-                :message => "NOOOOOO!!!!!"
-            }, status: 400
         end
     end
 end
