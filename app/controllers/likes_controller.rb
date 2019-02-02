@@ -9,9 +9,10 @@ class LikesController < ApplicationController
     end
     
     def create
-        like = Like.find_or_create_by(like_params)
+        # byebug
+        like = Like.create(like_params)
         # party_like = PartyLike.create(like_id: Like.id, party_id: params[:party_id])
-        
+
         render json: like
     
         # like = Like.new(like_params)
@@ -36,6 +37,6 @@ class LikesController < ApplicationController
     
     private
     def like_params
-        params.require(:like).permit(:user_id, :post_id, :like)
+        params.permit(:user_id, :post_id)
     end
 end
